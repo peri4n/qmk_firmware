@@ -33,18 +33,14 @@ enum planck_keycodes {
     COLEMAK = SAFE_RANGE,
     LOWER,
     RAISE,
-    NAV_LAYER,
-    GUI_LAYER,
     PLOVER,
     BACKLIT,
     EXT_PLV
 };
 
-#define PERMISSIVE_HOLD
-
 // Key aliases for legibility
-#define _______ KC_TRNS
 #define ___x___ KC_NO
+#define _______ KC_TRNS
 
 // Dashes
 #define KC_NDSH LALT(KC_MINS)
@@ -80,9 +76,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_COLEMAK] = {
         {KC_TAB                 , KC_Q,     KC_W,           KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,             KC_QUOT},
-        {CTL_T(KC_ESC)          , KC_A,     KC_R,           KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    LT(NAV_LAYER, KC_O), CTL_T(KC_ENT)},
+        {CTL_T(KC_ESC)          , KC_A,     KC_R,           KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    LT(_NAV, KC_O), CTL_T(KC_ENT)},
         {KC_LSPO                , KC_Z,     KC_X,           KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             KC_RSPC},
-        {LT(GUI_LAYER , KC_LBRC), ALL_T(KC_RBRC), KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,   RAISE,   KC_RGUI, KC_RALT, ALL_T(KC_LBRC),      LT(GUI_LAYER, KC_RBRC)}
+        {LT(_GUI, KC_LBRC), ALL_T(KC_RBRC), KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,   RAISE,   KC_RGUI, KC_RALT, ALL_T(KC_LBRC),      LT(_GUI, KC_RBRC)}
     },
     /* Numeric layer
      *                ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
@@ -134,9 +130,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_NAV] = {
         {___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___,                ___x___},
-        {_______, ___x___, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, LT(NAV_LAYER, KC_SCLN), _______},
+        {_______, ___x___, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______},
         {_______, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___,                _______},
-        {_______, _______, _______, _______, ___x___, ___x___, ___x___, ___x___, _______, _______, _______,                _______}
+        {___x___, _______, _______, _______, ___x___, ___x___, ___x___, ___x___, _______, _______, _______,                _______}
     },
 
     /* GUI (window management/mouse/media controls) layer
