@@ -57,10 +57,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *   Tap for ] [ --------'-----------------------------------------------------'
      */
     [_COLEMAK] = {
-        {KC_TAB                 , KC_Q,     KC_W,           KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,             KC_QUOT},
-        {CTL_T(KC_ESC)          , KC_A,     KC_R,           KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    LT(_NAV, KC_O), CTL_T(KC_ENT)},
-        {KC_LSPO                , KC_Z,     KC_X,           KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             KC_RSPC},
-        {KC_LBRC                , ALL_T(KC_RBRC), KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,   RAISE,   KC_RGUI, KC_RALT, ALL_T(KC_LBRC),      KC_RBRC}
+        {KC_TAB        , KC_Q,     KC_W,    KC_F,    KC_P,    KC_G,    KC_J,     KC_L,    KC_U,      KC_Y,      KC_SCLN,        KC_QUOT},
+        {CTL_T(KC_ESC) , KC_A,     KC_R,    KC_S,    KC_T,    KC_D,    KC_H,     KC_N,    KC_E,      KC_I,      LT(_NAV, KC_O), CTL_T(KC_ENT)},
+        {KC_LSPO       , KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_K,     KC_M,    KC_COMM,   KC_DOT,    KC_SLSH,        KC_RSPC},
+        {KC_LBRC       , KC_RBRC,  KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,   RAISE,   KC_RGUI,   KC_RALT,   KC_LBRC,        KC_RBRC}
     },
     /* Numeric layer
      *                ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
