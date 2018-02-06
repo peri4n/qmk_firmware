@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = {
         {___x___, ___x___, ___x___, ___x___, ___x___, ___x___, LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_UP), LCTL(KC_RGHT), ___x___, ___x___},
         {_______, ___x___, KC_HOME, KC_PGUP, KC_PGDN, KC_END,        KC_LEFT,       KC_DOWN,       KC_UP,       KC_RGHT, _______, _______},
-        {_______, ___x___, ___x___, ___x___, ___x___, ___x___,       ___x___,       ___x___,     ___x___,       ___x___, ___x___, _______},
+        {_______, ___x___, ___x___, ___x___, ___x___, ___x___, LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), ___x___, _______},
         {___x___, _______, _______, _______, ___x___, ___x___,       ___x___,       ___x___,     _______,       _______, _______, _______}
     },
 
