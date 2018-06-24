@@ -30,8 +30,11 @@ enum planck_layers {
 enum planck_keycodes {
     COLEMAK = SAFE_RANGE,
     LOWER,
-    RAISE,
-    BACKLIT,
+    RAISE
+};
+
+enum custom_keycodes {
+    MY_CUSTOM_MACRO = RAISE + 1
 };
 
 // Key aliases for legibility
@@ -40,6 +43,11 @@ enum planck_keycodes {
 
 #define KC_LCBRC S(KC_LBRC)
 #define KC_RCBRC S(KC_RBRC)
+#define TMUX_PREFIX LCTL(KC_Q)
+
+// Dashes
+#define KC_NDSH LALT(KC_MINS)
+#define KC_MDSH S(LALT(KC_MINS))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base layer (Colemak)
@@ -102,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
      *                │     │     │     │     │     │     │     │     │     │     │     │     │
      *                ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-     *                │     │     │Home │PgUp │PgDn │ End │  ←  │  ↓  │  ↑  │  →  │     │     │
+     *                │     │Home │PgUp │PgDn │ End │ Ins │  ←  │  ↓  │  ↑  │  →  │     │     │
      *                ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
      *                │     │     │     │     │     │     │     │     │     │     │     │     │
      *                ├─────┼─────┼─────┼─────┼─────┼─────┴─────┼─────┼─────┼─────┼─────┼─────┤
@@ -112,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = {
         {___x___, S(LCTL(KC_LEFT)), S(LCTL(KC_DOWN)), S(LCTL(KC_UP)), S(LCTL(KC_RGHT)), ___x___, LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_UP), LCTL(KC_RGHT), ___x___, ___x___},
         {_______, KC_HOME, KC_PGUP, KC_PGDN, KC_END,   KC_INS,       KC_LEFT,       KC_DOWN,       KC_UP,       KC_RGHT, _______, _______},
-        {_______, ___x___, ___x___, ___x___, ___x___, ___x___, LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), ___x___, _______},
+        {_______, MY_CUSTOM_MACRO, ___x___, ___x___, ___x___, ___x___, LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), ___x___, _______},
         {___x___, _______, _______, _______, ___x___, ___x___,       ___x___,       ___x___,     _______,       _______, _______, _______}
     },
 
@@ -136,11 +144,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 };
-
-#ifdef AUDIO_ENABLE
-float plover_song[][2]     = SONG(PLOVER_SOUND);
-float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
-#endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -170,14 +173,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
-        case BACKLIT:
+        case MY_CUSTOM_MACRO:
             if (record->event.pressed) {
-                register_code(KC_RSFT);
-#ifdef BACKLIGHT_ENABLE
-                backlight_step();
-#endif
-            } else {
-                unregister_code(KC_RSFT);
+                SEND_STRING(SS_LCTRL("q")"c"); // this is our macro!
             }
             return false;
             break;
