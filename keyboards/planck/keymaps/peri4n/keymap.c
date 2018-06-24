@@ -38,9 +38,8 @@ enum planck_keycodes {
 #define ___x___ KC_NO
 #define _______ KC_TRNS
 
-// Dashes
-#define KC_NDSH LALT(KC_MINS)
-#define KC_MDSH S(LALT(KC_MINS))
+#define KC_LCBRC S(KC_LBRC)
+#define KC_RCBRC S(KC_RBRC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base layer (Colemak)
@@ -51,16 +50,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
      *   Tap for ( -- │  ⇧  │  Z  │  X  │  C  │  V  │  B  │  K  │  M  │  ,  │  .  │  /  │  ⇧  │ -- Tap for )
      *                ├─────┼─────┼─────┼─────┼─────┼─────┴─────┼─────┼─────┼─────┼─────┼─────┤
-     *   Tap for [ -- │ GUI │Hyper│  ⌥  │  ⌘  │  ↓  │   Space   │  ↑  │  ⌘  │  ⌥  │Hyper│ GUI │ -- Tap for ]
+     *   Tap for [ -- │ GUI │     │  ⌥  │  ⌘  │  ↓  │   Space   │  ↑  │  ⌘  │  ⌥  │     │ GUI │ -- Tap for ]
      *                └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
      *                        /                                                     /
      *   Tap for ] [ --------'-----------------------------------------------------'
      */
     [_COLEMAK] = {
-        {KC_TAB        , KC_Q,     KC_W,    KC_F,    KC_P,    KC_G,    KC_J,     KC_L,    KC_U,      KC_Y,      KC_SCLN,        KC_QUOT},
-        {CTL_T(KC_ESC) , KC_A,     KC_R,    KC_S,    KC_T,    KC_D,    KC_H,     KC_N,    KC_E,      KC_I,      LT(_NAV, KC_O), CTL_T(KC_ENT)},
-        {KC_LSPO       , KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_K,     KC_M,    KC_COMM,   KC_DOT,    KC_SLSH,        KC_RSPC},
-        {KC_LBRC       , KC_RBRC,  KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,   RAISE,   KC_RGUI,   KC_RALT,   KC_LBRC,        KC_RBRC}
+        {KC_TAB        , KC_Q,     KC_W,    KC_F,    KC_P,    KC_G,    KC_J,     KC_L,       KC_U,      KC_Y,        KC_SCLN,        KC_QUOT},
+        {CTL_T(KC_ESC) , KC_A,     KC_R,    KC_S,    KC_T,    KC_D,    KC_H,     KC_N,       KC_E,      KC_I, LT(_NAV, KC_O),  CTL_T(KC_ENT)},
+        {KC_LSPO       , KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_K,     KC_M,    KC_COMM,    KC_DOT,        KC_SLSH,        KC_RSPC},
+        { _______      ,  _______ ,  KC_LALT, KC_LGUI,   LOWER,  KC_SPC,  KC_SPC,    RAISE,    KC_RGUI,   KC_RALT,  _______ , _______       }
     },
     /* Numeric layer
      *                ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
@@ -68,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *      window    ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
      *    switcher    │     │  1  │  2  │  3  │  4  │  5  │  6  │  7  │  8  │  9  │  0  │     │
      *                ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-     *                │     │  -  │  =  │  `  │  \  │  :  │ndash│mdash│  ,  │  .  │  /  │     │
+     *                │     │  -  │  =  │  `  │  \  │  :  │     │  {  │  [  │  ]  │  }  │     │
      *                ├─────┼─────┼─────┼─────┼─────┼─────┴─────┼─────┼─────┼─────┼─────┼─────┤
      *                │     │     │     │     │     │ Backspace │     │     │     │     │     │
      *                └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
@@ -76,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = {
         {LGUI(KC_GRV), KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  S(KC_3)},
         {_______,      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______},
-        {_______,      KC_MINS, KC_EQL,  KC_GRV,  KC_BSLS, KC_COLN, KC_NDSH, KC_MDSH, KC_COMM, KC_DOT,  KC_SLSH, _______},
+        {_______,      KC_MINS, KC_EQL,  KC_GRV,  KC_BSLS, KC_COLN, _______, KC_LCBRC, KC_LBRC, KC_RBRC,  KC_RCBRC, _______},
         {_______,      _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, _______, _______, _______, _______}
     },
 
@@ -86,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
      *                │     │  !  │  @  │  #  │  $  │  %  │  ^  │  &  │  *  │  '  │  "  │     │ \
      *                ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤  |-- Mostly shifted version
-     *                │     │  _  │  +  │  ~  │  |  │  :  │ndash│mdash│  ,  │  .  │  /  │     │ /    of lower layer
+     *                │     │  _  │  +  │  ~  │  |  │  :  │     │     │  ,  │  .  │  /  │     │ /    of lower layer
      *                ├─────┼─────┼─────┼─────┼─────┼─────┴─────┼─────┼─────┼─────┼─────┼─────┤
      *                │     │     │     │     │     │  Delete   │     │     │     │     │     │
      *                └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
@@ -94,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RAISE] = {
         {_______, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,  KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,     S(KC_3)},
         {_______, S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), S(KC_6), S(KC_7), S(KC_8), KC_QUOT, S(KC_QUOT), _______},
-        {_______, KC_UNDS, KC_PLUS, KC_TILD, KC_PIPE, KC_COLN, KC_NDSH, KC_MDSH, KC_COMM, KC_DOT,  KC_SLSH,    _______},
+        {_______, KC_UNDS, KC_PLUS, KC_TILD, KC_PIPE, KC_COLN, _______, _______, KC_COMM, KC_DOT,  KC_SLSH,    _______},
         {_______, _______, _______, _______, _______, KC_DEL,  KC_DEL,  _______, _______, _______, _______,    _______}
     },
     /* Directional navigation layer
@@ -111,8 +110,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
      */
     [_NAV] = {
-        {___x___, ___x___, ___x___, ___x___, ___x___, ___x___, LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_UP), LCTL(KC_RGHT), ___x___, ___x___},
-        {_______, ___x___, KC_HOME, KC_PGUP, KC_PGDN, KC_END,        KC_LEFT,       KC_DOWN,       KC_UP,       KC_RGHT, _______, _______},
+        {___x___, S(LCTL(KC_LEFT)), S(LCTL(KC_DOWN)), S(LCTL(KC_UP)), S(LCTL(KC_RGHT)), ___x___, LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_UP), LCTL(KC_RGHT), ___x___, ___x___},
+        {_______, KC_HOME, KC_PGUP, KC_PGDN, KC_END,   KC_INS,       KC_LEFT,       KC_DOWN,       KC_UP,       KC_RGHT, _______, _______},
         {_______, ___x___, ___x___, ___x___, ___x___, ___x___, LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), ___x___, _______},
         {___x___, _______, _______, _______, ___x___, ___x___,       ___x___,       ___x___,     _______,       _______, _______, _______}
     },
