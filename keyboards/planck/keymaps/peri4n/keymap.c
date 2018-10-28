@@ -24,7 +24,8 @@ enum planck_layers {
     _LOWER,
     _RAISE,
     _NAV,
-    _ADJUST
+    _IDEA,
+    _XMONAD
 };
 
 enum planck_keycodes {
@@ -33,21 +34,39 @@ enum planck_keycodes {
     RAISE
 };
 
-enum custom_keycodes {
-    MY_CUSTOM_MACRO = RAISE + 1
-};
-
 // Key aliases for legibility
 #define ___x___ KC_NO
 #define _______ KC_TRNS
 
-#define KC_LCBRC S(KC_LBRC)
-#define KC_RCBRC S(KC_RBRC)
-#define TMUX_PREFIX LCTL(KC_Q)
+// IDEA SHORT_CUTS
+#define IDE_FSC S(LCTL(KC_F12))  // full screen
+#define IDE_PRO LALT(KC_1)       // project view
+#define IDE_VCS LALT(KC_GRV)     // code versioning
 
-// Dashes
-#define KC_NDSH LALT(KC_MINS)
-#define KC_MDSH S(LALT(KC_MINS))
+#define IDE_TBP LCTL(KC_F8)      // toggle break point
+#define IDE_STI KC_F7            // step into
+#define IDE_STO KC_F8            // step over
+#define IDE_STC S(KC_F8)         // step out
+#define IDE_CON KC_F9            // contiue
+#define IDE_ABP LCTL(S(KC_F8))   // view all break points
+
+#define IDE_IMP LCTL(LALT(KC_B)) // implementation
+#define IDE_DEL LCTL(KC_B)       // declaration
+#define IDE_CLH LCTL(KC_H)       // type hierarchy
+#define IDE_CAH LCTL(LALT(KC_N)) // call hierarchy
+
+#define IDE_CLA LCTL(KC_N)       // class
+#define IDE_FIL LCTL(S(KC_N))    // file
+#define IDE_REC LCTL(KC_E)       // recent files
+#define IDE_NAV LALT(KC_HOME)    // navigation
+
+#define IDE_FOR LCTL(LALT(KC_L)) // format code
+#define IDE_BUI LCTL(KC_F9)      // build project
+#define IDE_DEC S(KC_F9)         // debug current configuration
+#define IDE_RUC S(KC_F10)        // run current configuration
+#define IDE_RUN LALT(S(KC_F10))  // run configurations
+
+#define IDE_ACT LCTL(S(KC_A))    // actions
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base layer (Colemak)
@@ -58,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
      *   Tap for ( -- │  ⇧  │  Z  │  X  │  C  │  V  │  B  │  K  │  M  │  ,  │  .  │  /  │  ⇧  │ -- Tap for )
      *                ├─────┼─────┼─────┼─────┼─────┼─────┴─────┼─────┼─────┼─────┼─────┼─────┤
-     *   Tap for [ -- │ GUI │     │  ⌥  │  ⌘  │  ↓  │   Space   │  ↑  │  ⌘  │  ⌥  │     │ GUI │ -- Tap for ]
+     *   Tap for [ -- │ IDE │     │  ⌥  │  ⌘  │  ↓  │   Space   │  ↑  │  ⌘  │  ⌥  │     │  X  │ -- Tap for ]
      *                └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
      *                        /                                                     /
      *   Tap for ] [ --------'-----------------------------------------------------'
@@ -67,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         {KC_TAB        , KC_Q,     KC_W,    KC_F,    KC_P,    KC_G,    KC_J,     KC_L,       KC_U,      KC_Y,        KC_SCLN,        KC_QUOT},
         {CTL_T(KC_ESC) , KC_A,     KC_R,    KC_S,    KC_T,    KC_D,    KC_H,     KC_N,       KC_E,      KC_I, LT(_NAV, KC_O),  CTL_T(KC_ENT)},
         {KC_LSPO       , KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_K,     KC_M,    KC_COMM,    KC_DOT,        KC_SLSH,        KC_RSPC},
-        { _______      ,  _______ ,  KC_LALT, KC_LGUI,   LOWER,  KC_SPC,  KC_SPC,    RAISE,    KC_RGUI,   KC_RALT,  _______ , _______       }
+        {MO(_IDEA)     ,  _______ ,  KC_LALT, KC_LGUI,   LOWER,  KC_SPC,  KC_SPC,    RAISE,    KC_RGUI,   KC_RALT,  _______ ,      MO(_XMONAD)}
     },
     /* Numeric layer
      *                ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
@@ -83,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = {
         {LGUI(KC_GRV), KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  S(KC_3)},
         {_______,      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______},
-        {_______,      KC_MINS, KC_EQL,  KC_GRV,  KC_BSLS, KC_COLN, _______, KC_LCBRC, KC_LBRC, KC_RBRC,  KC_RCBRC, _______},
+        {_______,      KC_MINS, KC_EQL,  KC_GRV,  KC_BSLS, KC_COLN, _______, KC_LCBR, KC_LBRC, KC_RBRC,  KC_RCBR, _______},
         {_______,      _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, _______, _______, _______, _______}
     },
 
@@ -120,10 +139,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = {
         {___x___, S(LCTL(KC_LEFT)), S(LCTL(KC_DOWN)), S(LCTL(KC_UP)), S(LCTL(KC_RGHT)), ___x___, LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_UP), LCTL(KC_RGHT), ___x___, ___x___},
         {_______, KC_HOME, KC_PGUP, KC_PGDN, KC_END,   KC_INS,       KC_LEFT,       KC_DOWN,       KC_UP,       KC_RGHT, _______, _______},
-        {_______, MY_CUSTOM_MACRO, ___x___, ___x___, ___x___, ___x___, LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), ___x___, _______},
+        {_______, ___x___, ___x___, ___x___, ___x___, ___x___, LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), ___x___, _______},
         {___x___, _______, _______, _______, ___x___, ___x___,       ___x___,       ___x___,     _______,       _______, _______, _______}
     },
 
+    /* Directional navigation layer
+     *
+     *         Large movements -----/```````````````````\   /```````````````````\----- Vim-style arrow keys
+     *                ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+     *                │     │     │     │     │     │     │     │     │     │     │     │     │
+     *                ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+     *                │     │Home │PgUp │PgDn │ End │ Ins │  ←  │  ↓  │  ↑  │  →  │     │     │
+     *                ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+     *                │     │     │     │     │     │     │     │     │     │     │     │     │
+     *                ├─────┼─────┼─────┼─────┼─────┼─────┴─────┼─────┼─────┼─────┼─────┼─────┤
+     *                │     │     │     │     │     │           │     │     │     │     │     │
+     *                └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
+     */
+    [_IDEA] = {
+        {KC_TAB        , _______,     KC_W,    KC_F,    KC_P,    KC_G   , IDE_TBP, IDE_STI, IDE_STO, IDE_STC, IDE_CON, IDE_ABP},
+        {CTL_T(KC_ESC) , IDE_PRO,     IDE_VCS,    KC_S,    KC_T, IDE_IMP, IDE_DEL, IDE_CLA, IDE_FIL, IDE_REC, _______, IDE_NAV},
+        {KC_LSPO       , IDE_FSC,     KC_X,       KC_C, IDE_CLH, IDE_CAH, IDE_FOR, IDE_BUI, IDE_DEC, IDE_RUC, IDE_RUN, KC_RSPC},
+        { _______    ,  _______ ,  KC_LALT, KC_LGUI,   LOWER,  KC_SPC,  KC_SPC, IDE_ACT, KC_RGUI, KC_RALT, _______, _______}
+    },
     /* Adjust (Lower + Raise)
      * ,-----------------------------------------------------------------------------------.
      * |      | Reset|      |      |      |      |      |      |      |      |      |  Del |
@@ -135,9 +173,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |      |      |      |      |      |             |      |      |      |      |      |
      * `-----------------------------------------------------------------------------------'
      */
-    [_ADJUST] = {
+    [_XMONAD] = {
         {_______, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL },
-        {_______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, _______,  COLEMAK,_______, _______, _______},
+        {_______, LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4),  AG_NORM, AG_SWAP, _______,  COLEMAK,_______, _______, _______},
         {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
         {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
     }
@@ -156,26 +194,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LOWER:
             if (record->event.pressed) {
                 layer_on(_LOWER);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+                update_tri_layer(_LOWER, _RAISE, _XMONAD);
             } else {
                 layer_off(_LOWER);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+                update_tri_layer(_LOWER, _RAISE, _XMONAD);
             }
             return false;
             break;
         case RAISE:
             if (record->event.pressed) {
                 layer_on(_RAISE);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+                update_tri_layer(_LOWER, _RAISE, _XMONAD);
             } else {
                 layer_off(_RAISE);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
-            }
-            return false;
-            break;
-        case MY_CUSTOM_MACRO:
-            if (record->event.pressed) {
-                SEND_STRING(SS_LCTRL("q")"c"); // this is our macro!
+                update_tri_layer(_LOWER, _RAISE, _XMONAD);
             }
             return false;
             break;
