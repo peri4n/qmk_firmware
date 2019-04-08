@@ -40,6 +40,7 @@ enum planck_keycodes {
 #define A(x) LALT(x)
 #define C(x) LCTL(x)
 #define CA(x) C(A(x))
+#define X(x) LGUI(x)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base layer (Colemak)
@@ -111,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_NAV1] = {
         {___x___, ___x___, ___x___, ___x___, ___x___, ___x___     ,    C(KC_F12), C(KC_LEFT), C(KC_DOWN), C(KC_UP), C(KC_RGHT), C(S(KC_F12))},
-        {_______, ___x___, ___x___, ___x___, ___x___, ___x___     ,   C(S(KC_A)),    KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT,    A(KC_ENT)},
+        {_______, X(KC_1), X(KC_2), X(KC_3), X(KC_4), ___x___     ,   C(S(KC_A)),    KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT,    A(KC_ENT)},
         {_______, ___x___, ___x___, ___x___, ___x___, ___x___     , C(S(KC_GRV)), A(KC_LEFT), A(KC_DOWN), A(KC_UP), A(KC_RGHT),    A(KC_INS)},
         {_______, _______, _______, _______, ___x___, C(S(KC_SPC)), C(S(KC_SPC)), A(KC_HOME),    _______,  _______,    _______,      _______}
     },
